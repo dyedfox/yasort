@@ -21,8 +21,7 @@
 - Python 3.10
 
 ## Features
-List the ready features here:
-- An optiion of splitting files by their extensions
+- An option of splitting files by their extensions
 - Posibility to choose delimiter
 
 ## Usage
@@ -31,10 +30,6 @@ Example of usage:
 `fsort`
 `Input file extension (you can ignore this option):`
 `Input end mask (number of ending symbols or delimiter):_`
-
-
-## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
 
 
 ## Acknowledgements

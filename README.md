@@ -12,7 +12,8 @@
 
 
 ## General Information
-- How does it work? For example, set of files \[gallery1_001.jpg .. gallery1_119.jpg, gallery2_001 .. gallery2_227\] will be distributed to directories \[gallery1, gallery2\] respectively.
+- How does it work? For example, set of files \[gallery1_001.jpg .. gallery1_119.jpg, gallery2_001.jpg .. gallery2_227.jpg\] 
+will be distributed to directories \[gallery1, gallery2\] respectively.
 - This just makes life a little easier :)
 
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->

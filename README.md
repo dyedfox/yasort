@@ -28,10 +28,8 @@ will be distributed to directories \[gallery1, gallery2\] respectively.
 ## Usage
 Example of usage:
 
-`fsort`
-
-`Input file extension (you can ignore this option):`
-
+`fsort`\
+`Input file extension (you can ignore this option):`\
 `Input end mask (number of ending symbols or delimiter):_`
 
 

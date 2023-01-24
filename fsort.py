@@ -8,9 +8,14 @@ dir_list = os.listdir(dir) # Receiving the list of files in current directory
 #dir_list = [f for f in dir_list if os.path.isfile(dir+'/'+f)]
 
 files_list=[] #Files list
+print ('''
+>> fsort version 0.1.1 -  A simple way of distributing files to folders basing on their name prefixes and file extension.
+(https://github.com/dyedfox/fsort)
 
-extension = input('Input the file extension (you can ignore this option):')
-mask = input('Input the end mask (number of ending symbols or delimiter):')
+*Please note: directory is considered a file with null extension - be careful!
+''')
+extension = input('>> Input the file extension (you can ignore this option): ')
+mask = input('>> Input the end mask (number of ending symbols or delimiter): ')
 
 if extension:
     for item in dir_list:
@@ -23,8 +28,7 @@ else:
 if mask.isnumeric():
     mask=int(mask)*-1
     for file in files_list:
-        name=file.split('.')[0]
-        name=name[:mask]
+        name=file.rsplit('.', 1)[0][:mask]
     # Checking if directory exists
     #    if not os.path.exists(dir+'/'+name):
     #        os.makedirs(dir+'/'+name)
@@ -34,7 +38,6 @@ if mask.isnumeric():
 else:
     for file in files_list:
         if mask in file:
-            name=file.split('.')[0]
-            name=name.rsplit(mask, 1)
+            name=file.rsplit('.', 1)[0].rsplit(mask, 1)
             os.makedirs(dir+'/'+name[0], exist_ok=True)        # A simpler method to check if dir exists
             os.rename(dir+'/'+file, dir+'/'+name[0]+'/'+file)

@@ -1,0 +1,1 @@
+1. Adding counter of processed files.

@@ -1,5 +1,5 @@
 # fsort
-> A simple way of distributing files to folders based on their name prefixes and file extension.
+> A simple way of distributing files to directories based on their name prefixes and file extension.
 
 ## Table of Contents
 * [General Info](#general-information)

@@ -29,7 +29,7 @@ will be distributed into directories `[gallery1, gallery2]` respectively.
 
 First, I recommend making an alias for this script in your Linux system:
 
-`alias fsort='python3 /path/to/fsort.py'`
+`alias fsort='python3 /path/to/fsort.py'`, or whatever.
 
 so you can use it as a command in the Terminal.
 

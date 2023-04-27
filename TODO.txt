@@ -1,0 +1,4 @@
+1. Adding counter of processed files.
+2. Verbose mode - show info about what script doing.
+3. CLI mode
+4. Multiple extensions and multiple delimiters mode

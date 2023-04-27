@@ -1,5 +1,5 @@
 # fsort
-> A simple way of distributing files to folders based on their name prefixes and file extension.
+> A simple way of distributing files to directories based on their name prefixes and file extension.
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -26,6 +26,8 @@ will be distributed into directories `[gallery1, gallery2]` respectively.
 - Posibility to choose a delimiter
 
 ## Usage
+
+Here is the demo video: https://youtu.be/d_KZdSa7qNA
 
 First, I recommend making an alias for this script in your Linux system:
 

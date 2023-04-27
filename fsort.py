@@ -9,13 +9,13 @@ dir_list = os.listdir(dir) # Receiving the list of files in current directory
 
 files_list=[] #Files list
 print ('''
->> fsort version 0.1.1 -  A simple way of distributing files to folders basing on their name prefixes and file extension.
+>> fsort version 0.1.1 -  fsort is a simple tool for distributing files to folders based on their name prefixes and file extensions.
 (https://github.com/dyedfox/fsort)
 
-*Please note: directory is considered a file with null extension - be careful!
+*Please note: a directory is considered a file with null extension. Be careful while using this option!
 ''')
-extension = input('>> Input the file extension (you can ignore this option): ')
-mask = input('>> Input the end mask (number of ending symbols or delimiter): ')
+extension = input('>> Please enter the file extension (you can leave this option blank if you want to sort all files regardless of their extension): ')
+mask = input('>> Please enter the number of ending characters or delimiter to use for sorting files: ')
 
 if extension:
     for item in dir_list:

@@ -27,6 +27,8 @@ will be distributed into directories `[gallery1, gallery2]` respectively.
 
 ## Usage
 
+Here is the demo video: https://youtu.be/d_KZdSa7qNA
+
 First, I recommend making an alias for this script in your Linux system:
 
 `alias fsort='python3 /path/to/fsort.py'`, or whatever.

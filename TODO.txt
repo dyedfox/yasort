@@ -3,3 +3,4 @@
 3. CLI mode
 4. Multiple extensions and multiple delimiters mode
 5. Possibility to choose number of delimiter from the end.
+6. Preview of changes?

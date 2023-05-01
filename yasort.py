@@ -11,7 +11,7 @@ def get_files_by_extension(extension):
 
 def create_directories_from_delimiter(files_list, delimiter, delimiter_position):
     for file_name in files_list:
-        if delimiter.isdigit():
+        if delimiter.isnumeric():
             directory_name = file_name.rsplit('.', 1)[0][:-int(delimiter)]
         else:
             directory_name = file_name.rsplit('.', 1)[0].rsplit(delimiter, int(delimiter_position))[0]
@@ -31,11 +31,15 @@ def main():
     extension = input('>> Please enter the file extension (you can leave this option blank if you want to sort all files regardless of their extension): ')
     delimiter = input('>> Please enter the number of ending characters or delimiter to use for sorting files: ')
 
-    if delimiter.isdigit():
+    if delimiter.isnumeric():
         files_list = get_files_by_extension(extension)
         position=1
     else:
-        position=input(">> Please enter the number of delimiter's position from the end: ")
+        position=input(">> Please enter the number of delimiter's position from the end (you can leave this option blank to set it to the default value [1]): ")
+        if position.isnumeric():
+            pass
+        else:
+            position=1
     files_list = get_files_by_extension(extension)
     create_directories_from_delimiter(files_list, delimiter, position)
 

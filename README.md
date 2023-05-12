@@ -1,4 +1,4 @@
-# fsort
+# yasort
 > A simple way of distributing files to directories based on their name prefixes and file extension.
 
 ## Table of Contents
@@ -23,7 +23,7 @@ will be distributed into directories `[gallery1, gallery2]` respectively.
 
 ## Features
 - An option to split files by their extensions
-- Posibility to choose a delimiter
+- Posibility to choose a delimiter and its position from the end
 
 ## Usage
 
@@ -31,15 +31,30 @@ Here is the demo video: https://youtu.be/d_KZdSa7qNA
 
 First, I recommend making an alias for this script in your Linux system:
 
-`alias fsort='python3 /path/to/fsort.py'`, or whatever.
+`alias yasort='python3 /path/to/yasort.py'`, or whatever.
 
 so you can use it as a command in the Terminal.
 
 Example of usage:
 
-`fsort`\
-`Input file extension (you can ignore this option):`\
-`Input end mask (number of ending symbols or delimiter):_`
+```yasort
+
+    >> yasort version 0.4.0 -  yasort (Yet Another Sort Tool) is a simple tool for distributing files to folders based on their name prefixes and file extensions.
+    (https://github.com/dyedfox/fsort)
+
+    *Please note: a directory is considered a file with null extension. Be careful while using this option!
+    
+>> Please enter the file extension (you can leave this option blank if you want to sort all files regardless of their extension): png
+>> Please enter the number of ending characters or delimiter to use for sorting files: -
+>> Please enter the number of delimiter's position from the end (you can leave this option blank to set it to the default value [1]): 3
+The following directories will be created (2 total, existing ones marked with [*]):
+
+[+] My pics 2023-05
+[*] My pics 2023-04
+
+Do you want to proceed? (Y/n): 
+```
+
 
 ## Acknowledgements
 - This project was inspired by GNU/Linux and open-source communities

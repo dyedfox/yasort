@@ -52,7 +52,8 @@ The following directories will be created (2 total, existing ones marked with [*
 [+] My pics 2023-05
 [*] My pics 2023-04
 
-Do you want to proceed? (Y/n): ```
+Do you want to proceed? (Y/n): 
+```
 
 
 ## Acknowledgements

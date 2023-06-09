@@ -46,7 +46,12 @@ def create_directories_from_delimiter(files_list, delimiter, delimiter_position)
                 directory_path = os.path.join(os.getcwd(), directory_name)
                 os.makedirs(directory_path, exist_ok=True)
                 file_path = os.path.join(os.getcwd(), file_name)
-                os.rename(file_path, os.path.join(directory_path, file_name))
+                if os.path.exists(file_path):
+                    user_confirmation = input(f'\n{file_name} exists. Do you want to overwrite? (y/N): ').strip().lower() or 'n'
+                    if user_confirmation != 'n':
+                        os.rename(file_path, os.path.join(directory_path, file_name))
+                    else:
+                        pass
             except Exception as e:
                 print(f'Error creating directory {directory_name}: {str(e)}')
 

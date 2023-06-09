@@ -69,7 +69,9 @@ File '/home/yaroslav/tmp2/187/187002.txt' already exists. Do you want to overwri
 188004.txt -> /home/yaroslav/tmp2/188/188004.txt
 188008.txt -> /home/yaroslav/tmp2/188/188008.txt
 
-Operation completed. 9 file(s) total, 1 file(s) skipped, 2 file(s) overwritten.```
+Operation completed. 9 file(s) total, 1 file(s) skipped, 2 file(s) overwritten.
+
+```
 
 Example 2 of usage:
 

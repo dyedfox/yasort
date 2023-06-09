@@ -20,7 +20,7 @@ def create_directories_from_delimiter(files_list, delimiter, delimiter_position)
             directories_to_create.add(directory_name)
 
     if not directories_to_create:
-        print('No directories to create.')
+        print('\nNo directories to create. No files to move.')
         return
 
     print(f'The following directories will be created ({len(directories_to_create)} total, existing ones marked with [*]):\n')
@@ -33,9 +33,10 @@ def create_directories_from_delimiter(files_list, delimiter, delimiter_position)
 
     user_confirmation = input('\nDo you want to proceed? (Y/n): ').strip().lower() or 'y'
     if user_confirmation != 'y':
-        print('Operation cancelled.')
+        print('\nOperation cancelled.')
         return
-
+    overwrite_count = 0
+    skipped_count = 0
     for file_name in files_list:
         if delimiter.isnumeric():
             directory_name = file_name.rsplit('.', 1)[0][:-int(delimiter)]
@@ -46,16 +47,29 @@ def create_directories_from_delimiter(files_list, delimiter, delimiter_position)
                 directory_path = os.path.join(os.getcwd(), directory_name)
                 os.makedirs(directory_path, exist_ok=True)
                 file_path = os.path.join(os.getcwd(), file_name)
-                os.rename(file_path, os.path.join(directory_path, file_name))
+                if os.path.exists(os.path.join(directory_path, file_name)):
+                    user_confirmation = input(f"\nFile '{os.path.join(directory_path, file_name)}' already exists. Do you want to overwrite it? (y/N): ").strip().lower() or 'n'
+                    if user_confirmation != 'n':
+                        os.rename(file_path, os.path.join(directory_path, file_name))
+                        print (f'{file_name} -> {os.path.join(directory_path, file_name)}')
+                        overwrite_count += 1
+                    else:
+                        print (f'{file_name} skipped.')
+                        skipped_count += 1
+                        pass
+                else:
+                    os.rename(file_path, os.path.join(directory_path, file_name))
+                    print (f'{file_name} -> {os.path.join(directory_path, file_name)}')
             except Exception as e:
                 print(f'Error creating directory {directory_name}: {str(e)}')
+    print (f'\nOperation completed. {len(files_list)} file(s) total, {skipped_count} file(s) skipped, {overwrite_count} file(s) overwritten.')
 
 def main():
     print('''
-    >> yasort version 0.4.0 -  yasort (Yet Another Sort Tool) is a simple tool for distributing files to folders based on their name prefixes and file extensions.
-    (https://github.com/dyedfox/fsort)
+yasort version 0.9.0 -  yasort (Yet Another Sort Tool) is a simple tool for distributing files to folders based on their name prefixes and file extensions.
+(https://github.com/dyedfox/yasort)
 
-    *Please note: a directory is considered a file with null extension. Be careful while using this option!
+*Please note: a directory is considered a file with null extension. Be careful while using this option!
     ''')
     extension = input('>> Please enter the file extension (you can leave this option blank if you want to sort all files regardless of their extension): ')
     delimiter = input('>> Please enter the number of ending characters or delimiter to use for sorting files: ')

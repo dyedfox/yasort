@@ -17,7 +17,7 @@ will be distributed into directories `[gallery1, gallery2]` respectively.
 ## Installation
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/username/repo/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/dyedfox/yasort/main/install.sh | bash
 ```
 
 ## Technologies Used

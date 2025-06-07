@@ -1,5 +1,5 @@
 # yasort
-> A simple way of distributing files to directories based on their name prefixes and file extension.
+A simple way of distributing files to directories based on their name prefixes and file extension.
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -8,15 +8,17 @@
 * [Usage](#usage)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-<!-- * [License](#license) -->
-
 
 ## General Information
-- How does this script work? For example, a set of files `[gallery1_001.jpg .. gallery1_119.jpg, gallery2_001.jpg .. gallery2_227.jpg]` 
+- How it works. For example, a set of files `[gallery1_001.jpg .. gallery1_119.jpg, gallery2_001.jpg .. gallery2_227.jpg]` 
 will be distributed into directories `[gallery1, gallery2]` respectively.
 - This script simply makes life a little easier :)
 
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+## Installation
+
+```bash
+curl -sSL https://raw.githubusercontent.com/username/repo/main/install.sh | bash
+```
 
 ## Technologies Used
 - Python 3.10 + os module from the Python Standart Library
@@ -26,14 +28,6 @@ will be distributed into directories `[gallery1, gallery2]` respectively.
 - Posibility to choose a delimiter and its position from the end
 
 ## Usage
-
-<!-- Here is the demo video: https://youtu.be/d_KZdSa7qNA -->
-
-First, I recommend making an alias for this script in your Linux system:
-
-`alias yasort='python3 /path/to/yasort.py'`, or whatever.
-
-so you can use it as a command in the Terminal.
 
 Example 1 of usage:
 
@@ -117,10 +111,3 @@ Operation completed. 9 file(s) total, 1 file(s) skipped, 2 file(s) overwritten.
 
 ## Contact
 Created by dyedfox - feel free to contact me via GitHub!
-
-
-<!-- Optional -->
-<!-- ## License -->
-<!-- This project is open source and available under the [... License](). -->
-
-<!-- You don't have to include all sections - just the one's relevant to your project -->

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-yasort version 1.0.0 - Yet Another Sort Tool
+yasort version 1.0.1 - Yet Another Sort Tool
 A simple tool for distributing files to folders based on their name prefixes and file extensions.
 https://github.com/dyedfox/yasort
 """
@@ -105,7 +105,7 @@ def get_files_by_extension(directory: str, extension: str) -> List[str]:
         return []
 
 
-def extract_directory_name(filename: str, delimiter: str, delimiter_position: int) -> Optional[str]:
+def extract_directory_name(filename: str, delimiter: str, delimiter_position: int, force_string: bool = False) -> Optional[str]:
     """
     Extract directory name from filename based on delimiter or character count.
     
@@ -113,6 +113,7 @@ def extract_directory_name(filename: str, delimiter: str, delimiter_position: in
         filename: Name of the file
         delimiter: Either a string delimiter or numeric string for character count
         delimiter_position: Position of delimiter from the end (1-based)
+        force_string: If True, treat numeric delimiters as string delimiters
         
     Returns:
         Directory name or None if extraction fails
@@ -120,14 +121,14 @@ def extract_directory_name(filename: str, delimiter: str, delimiter_position: in
     # Remove file extension first
     name_without_ext = Path(filename).stem
     
-    if delimiter.isnumeric():
+    if delimiter.isnumeric() and not force_string:
         # Remove N characters from the end
         char_count = int(delimiter)
         if char_count >= len(name_without_ext):
             return None  # Would result in empty or invalid directory name
         return name_without_ext[:-char_count]
     else:
-        # Split by delimiter
+        # Split by delimiter (treating it as string even if numeric)
         parts = name_without_ext.rsplit(delimiter, delimiter_position)
         if len(parts) <= 1:
             return None  # Delimiter not found enough times
@@ -135,7 +136,7 @@ def extract_directory_name(filename: str, delimiter: str, delimiter_position: in
 
 
 def create_directories_and_move_files(files_list: List[str], delimiter: str, 
-                                    delimiter_position: int, source_dir: str = ".") -> None:
+                                    delimiter_position: int, source_dir: str = ".", force_string: bool = False) -> None:
     """
     Create directories and move files based on naming pattern.
     
@@ -144,13 +145,14 @@ def create_directories_and_move_files(files_list: List[str], delimiter: str,
         delimiter: Delimiter or character count for directory extraction
         delimiter_position: Position of delimiter from end
         source_dir: Source directory path
+        force_string: If True, treat numeric delimiters as string delimiters
     """
     # Determine directories to create
     directories_to_create = set()
     file_to_dir_mapping = {}
     
     for filename in files_list:
-        directory_name = extract_directory_name(filename, delimiter, delimiter_position)
+        directory_name = extract_directory_name(filename, delimiter, delimiter_position, force_string)
         if directory_name and directory_name.strip():  # Valid, non-empty directory name
             directories_to_create.add(directory_name)
             file_to_dir_mapping[filename] = directory_name
@@ -277,6 +279,16 @@ yasort organizes files into directories based on patterns in their filenames.
 - Characters to remove: 3
 - Result: Creates 'IMG' and 'DOC' directories
 
+{colorize('Using numbers as string delimiters:', Colors.BLUE)}
+- Files: IMG009_1111, IMG009_1, IMG009123
+- Delimiter: 9 (with string mode)
+- Result: Creates 'IMG00' directory
+
+{colorize('DELIMITER MODES:', Colors.MAGENTA, bold=True)}
+- Numeric mode: Remove N characters from end (e.g., '3' removes last 3 chars)
+- String mode: Split on delimiter character (e.g., '9' splits on digit '9')
+- Use 'string' mode option to force numbers to be treated as delimiters
+
 {colorize('TIPS:', Colors.MAGENTA, bold=True)}
 - Test with a small number of files first
 - Make backups of important files before running
@@ -289,6 +301,7 @@ yasort organizes files into directories based on patterns in their filenames.
   -d, --delimiter DELIM   Delimiter string or character count
   -p, --position NUM      Delimiter position from end (default: 1)
   --directory PATH        Directory to process (default: current)
+  --string-mode          Treat numeric delimiters as strings
   --version              Show version information
 
 {colorize('Press Enter to continue...', Colors.DIM)}
@@ -306,12 +319,14 @@ EXAMPLES:
   yasort                              # Interactive mode
   yasort -e txt -d _ -p 1             # Sort .txt files using underscore delimiter
   yasort -e jpg -d 3                  # Sort .jpg files by removing last 3 characters
+  yasort -e jpg -d 9 --string-mode    # Sort .jpg files using '9' as string delimiter
   yasort --directory /path/to/dir     # Sort files in specific directory
   
 COMMON USE CASES:
   Photo organization:    yasort -e jpg -d _ -p 1
   Document sorting:      yasort -e pdf -d 3
   Music file cleanup:    yasort -e mp3 -d " - " -p 1
+  Number delimiters:     yasort -e txt -d 9 --string-mode
 
 For detailed help and examples, run in interactive mode or visit:
 https://github.com/dyedfox/yasort
@@ -326,11 +341,13 @@ https://github.com/dyedfox/yasort
                        help='Delimiter position from end (default: 1)')
     parser.add_argument('--directory', default='.',
                        help='Directory to process (default: current directory)')
-    parser.add_argument('--version', action='version', version='yasort 1.0.0')
+    parser.add_argument('--string-mode', action='store_true',
+                       help='Treat numeric delimiters as string delimiters instead of character counts')
+    parser.add_argument('--version', action='version', version='yasort 1.0.1')
     
     args = parser.parse_args()
 
-    print_header('yasort version 1.0.0 - Yet Another Sort Tool')
+    print_header('yasort version 1.0.1 - Yet Another Sort Tool')
     print('A simple tool for distributing files to folders based on their name prefixes.')
     print(colorize('https://github.com/dyedfox/yasort', Colors.BLUE, bold=True))
     print()
@@ -347,7 +364,7 @@ https://github.com/dyedfox/yasort
             break
             
         while True:
-            delimiter = input(f'{colorize("Delimiter or number of ending characters to remove", Colors.CYAN)} ("help" for help): ').strip()
+            delimiter = input(f'{colorize("Delimiter or number of ending characters to remove", Colors.CYAN)} ("help" for help): ')
             if delimiter.lower() == 'help':
                 show_interactive_help()
                 continue
@@ -355,8 +372,22 @@ https://github.com/dyedfox/yasort
                 print_error('Delimiter is required.')
                 continue
             break
+        
+        # Ask about string mode for numeric delimiters
+        force_string = False
+        if delimiter.isnumeric():
+            while True:
+                mode_input = input(f'{colorize("Numeric delimiter detected. Use as:", Colors.CYAN)} (c)haracter count or (s)tring delimiter? (c/s): ').strip().lower()
+                if mode_input in ['c', 'char', 'character']:
+                    force_string = False
+                    break
+                elif mode_input in ['s', 'str', 'string']:
+                    force_string = True
+                    break
+                else:
+                    print_warning('Please enter c (character count) or s (string delimiter).')
             
-        if not delimiter.isnumeric():
+        if not delimiter.isnumeric() or force_string:
             while True:
                 position_input = input(f'{colorize("Delimiter position from end", Colors.CYAN)} (default: 1, "help" for help): ').strip()
                 if position_input.lower() == 'help':
@@ -370,13 +401,14 @@ https://github.com/dyedfox/yasort
         extension = args.extension or ''
         delimiter = args.delimiter
         position = args.position
+        force_string = args.string_mode
 
     # Validate inputs
     if not delimiter:
         print_error('Error: Delimiter cannot be empty.')
         sys.exit(1)
         
-    if delimiter.isnumeric() and int(delimiter) <= 0:
+    if delimiter.isnumeric() and not force_string and int(delimiter) <= 0:
         print_error('Error: Character count must be positive.')
         sys.exit(1)
         
@@ -392,7 +424,17 @@ https://github.com/dyedfox/yasort
         sys.exit(0)
     
     print_info(f'Found {len(files_list)} file(s) to process.')
-    create_directories_and_move_files(files_list, delimiter, position, args.directory)
+    
+    # Show mode information
+    if delimiter.isnumeric():
+        if force_string:
+            print_info(f'Using "{delimiter}" as string delimiter (position {position} from end)')
+        else:
+            print_info(f'Using character count mode: removing last {delimiter} characters')
+    else:
+        print_info(f'Using "{delimiter}" as string delimiter (position {position} from end)')
+    
+    create_directories_and_move_files(files_list, delimiter, position, args.directory, force_string)
 
 
 if __name__ == '__main__':

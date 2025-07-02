@@ -31,80 +31,110 @@ curl -sSL https://raw.githubusercontent.com/dyedfox/yasort/main/install.sh | bas
 
 Example 1 of usage:
 
-```dyedfox@my-pc:~/dir$ yasort
+```bash
+yasort
+yasort version 1.0.1 - Yet Another Sort Tool
+A simple tool for distributing files to folders based on their name prefixes.
+https://github.com/dyedfox/yasort
 
-yasort version 0.9.0 -  yasort (Yet Another Sort Tool) is a simple tool for distributing files to folders based on their name prefixes and file extensions.
-(https://github.com/dyedfox/yasort)
+ℹ Interactive mode - Type "help" for detailed information
 
-*Please note: a directory is considered a file with null extension. Be careful while using this option!
-    
->> Please enter the file extension (you can leave this option blank if you want to sort all files regardless of their extension): 
->> Please enter the number of ending characters or delimiter to use for sorting files: 3
-The following directories will be created (3 total, existing ones marked with [*]):
+File extension (leave blank for all files, "help" for help): jpg
+Delimiter or number of ending characters to remove ("help" for help): 4
+Numeric delimiter detected. Use as: (c)haracter count or (s)tring delimiter? (c/s): c
+ℹ Found 600 file(s) to process.
+ℹ Using character count mode: removing last 4 characters
 
-[*] 187
-[*] 188
-[*] 189
+Directories to be created (6 total):
+Legend: [+] New directory, [*] Existing directory
 
-Do you want to proceed? (Y/n): 
+[+] img_2024-04-25
+[+] img_2024-04-26
+[+] img_2024-04-27
+[+] img_2024-04-28
+[+] img_2024-04-29
+[+] img_2024-04-30
 
-File '/home/dyedfox/tmp2/188/188009.txt' already exists. Do you want to overwrite it? (y/N): 
-188009.txt skipped.
-189001.txt -> /home/dyedfox/tmp2/189/189001.txt
-189002.txt -> /home/dyedfox/tmp2/189/189002.txt
+Do you want to proceed? (y/n): y
+✓ Moved: img_2024-04-25-001.jpg -> img_2024-04-25/
+✓ Moved: img_2024-04-26-001.jpg -> img_2024-04-26/
+✓ Moved: img_2024-04-27-001.jpg -> img_2024-04-27/
+✓ Moved: img_2024-04-28-001.jpg -> img_2024-04-28/
+✓ Moved: img_2024-04-29-001.jpg -> img_2024-04-29/
+✓ Moved: img_2024-04-30-001.jpg -> img_2024-04-30/
+✓ Moved: img_2024-04-25-002.jpg -> img_2024-04-25/
+✓ Moved: img_2024-04-26-002.jpg -> img_2024-04-26/
+✓ Moved: img_2024-04-27-002.jpg -> img_2024-04-27/
+✓ Moved: img_2024-04-28-002.jpg -> img_2024-04-28/
+✓ Moved: img_2024-04-29-002.jpg -> img_2024-04-29/
+✓ Moved: img_2024-04-30-002.jpg -> img_2024-04-30/
+✓ Moved: img_2024-04-25-003.jpg -> img_2024-04-25/
+✓ Moved: img_2024-04-26-003.jpg -> img_2024-04-26/
+✓ Moved: img_2024-04-27-003.jpg -> img_2024-04-27/
+✓ Moved: img_2024-04-28-003.jpg -> img_2024-04-28/
+✓ Moved: img_2024-04-29-003.jpg -> img_2024-04-29/
+✓ Moved: img_2024-04-30-003.jpg -> img_2024-04-30/
 
-File '/home/dyedfox/tmp2/189/189003.txt' already exists. Do you want to overwrite it? (y/N): y
-189003.txt -> /home/dyedfox/tmp2/189/189003.txt
-187001.txt -> /home/dyedfox/tmp2/187/187001.txt
-
-File '/home/dyedfox/tmp2/187/187002.txt' already exists. Do you want to overwrite it? (y/N): y
-187002.txt -> /home/dyedfox/tmp2/187/187002.txt
-187003.txt -> /home/dyedfox/tmp2/187/187003.txt
-188004.txt -> /home/dyedfox/tmp2/188/188004.txt
-188008.txt -> /home/dyedfox/tmp2/188/188008.txt
-
-Operation completed. 9 file(s) total, 1 file(s) skipped, 2 file(s) overwritten.
-
+Operation Summary:
+  Total files processed: 600
+  Files moved: 600
+✓ All operations completed successfully!
 ```
 
 Example 2 of usage:
 
-```dyedfox@my-pc:~/dir$ yasort
+```bash
+yasort version 1.0.1 - Yet Another Sort Tool
+A simple tool for distributing files to folders based on their name prefixes.
+https://github.com/dyedfox/yasort
 
-yasort version 0.9.0 -  yasort (Yet Another Sort Tool) is a simple tool for distributing files to folders based on their name prefixes and file extensions.
-(https://github.com/dyedfox/yasort)
+ℹ Interactive mode - Type "help" for detailed information
 
-*Please note: a directory is considered a file with null extension. Be careful while using this option!
-    
->> Please enter the file extension (you can leave this option blank if you want to sort all files regardless of their extension): txt
->> Please enter the number of ending characters or delimiter to use for sorting files: _
->> Please enter the number of delimiter's position from the end (you can leave this option blank to set it to the default value [1]): 1
-The following directories will be created (3 total, existing ones marked with [*]):
+File extension (leave blank for all files, "help" for help): jpg
+Delimiter or number of ending characters to remove ("help" for help): -
+Delimiter position from end (default: 1, "help" for help): 1
+ℹ Found 18 file(s) to process.
+ℹ Using "-" as string delimiter (position 1 from end)
 
-[+] 187
-[*] 188
-[*] 189
+Directories to be created (6 total):
+Legend: [+] New directory, [*] Existing directory
 
-Do you want to proceed? (Y/n): 
-187_001.txt -> /home/dyedfox/tmp2/187/187_001.txt
-187_002.txt -> /home/dyedfox/tmp2/187/187_002.txt
-187_003.txt -> /home/dyedfox/tmp2/187/187_003.txt
+[+] img_2024-04-25
+[+] img_2024-04-26
+[+] img_2024-04-27
+[+] img_2024-04-28
+[+] img_2024-04-29
+[+] img_2024-04-30
 
-File '/home/dyedfox/tmp2/188/188_001.txt' already exists. Do you want to overwrite it? (y/N): y
-188_001.txt -> /home/dyedfox/tmp2/188/188_001.txt
+Do you want to proceed? (y/n): y
+✓ Moved: img_2024-04-25-01.jpg -> img_2024-04-25/
+✓ Moved: img_2024-04-26-01.jpg -> img_2024-04-26/
+✓ Moved: img_2024-04-27-01.jpg -> img_2024-04-27/
+✓ Moved: img_2024-04-28-01.jpg -> img_2024-04-28/
+✓ Moved: img_2024-04-29-01.jpg -> img_2024-04-29/
+✓ Moved: img_2024-04-30-01.jpg -> img_2024-04-30/
+✓ Moved: img_2024-04-25-02.jpg -> img_2024-04-25/
+✓ Moved: img_2024-04-26-02.jpg -> img_2024-04-26/
+✓ Moved: img_2024-04-27-02.jpg -> img_2024-04-27/
+✓ Moved: img_2024-04-28-02.jpg -> img_2024-04-28/
+✓ Moved: img_2024-04-29-02.jpg -> img_2024-04-29/
+✓ Moved: img_2024-04-30-02.jpg -> img_2024-04-30/
+✓ Moved: img_2024-04-25-03.jpg -> img_2024-04-25/
+✓ Moved: img_2024-04-26-03.jpg -> img_2024-04-26/
+✓ Moved: img_2024-04-27-03.jpg -> img_2024-04-27/
+✓ Moved: img_2024-04-28-03.jpg -> img_2024-04-28/
+✓ Moved: img_2024-04-29-03.jpg -> img_2024-04-29/
+✓ Moved: img_2024-04-30-03.jpg -> img_2024-04-30/
 
-File '/home/dyedfox/tmp2/188/188_002.txt' already exists. Do you want to overwrite it? (y/N): y
-188_002.txt -> /home/dyedfox/tmp2/188/188_002.txt
-188_003.txt -> /home/dyedfox/tmp2/188/188_003.txt
-189_001.txt -> /home/dyedfox/tmp2/189/189_001.txt
-
-File '/home/dyedfox/tmp2/189/189_002.txt' already exists. Do you want to overwrite it? (y/N): n
-189_002.txt skipped.
-189_003.txt -> /home/dyedfox/tmp2/189/189_003.txt
-
-Operation completed. 9 file(s) total, 1 file(s) skipped, 2 file(s) overwritten.
-
+Operation Summary:
+  Total files processed: 18
+  Files moved: 18
+✓ All operations completed successfully!
 ```
+
+The output is colorized as follows:
+
+![Screenshot](./screenshot.png)
 
 ## Acknowledgements
 - This project was inspired by GNU/Linux and open-source communities
